@@ -8,7 +8,7 @@ const Navbar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("profileDetails"));
+    const data = JSON.parse(sessionStorage.getItem("profileDetails"));
     if (data) {
       setProfile(data);
     }
@@ -17,7 +17,7 @@ const Navbar = () => {
   const logOut = () => {
     googleLogout();
     setProfile(null);
-    localStorage.removeItem("profileDetails");
+    sessionStorage.removeItem("profileDetails");
     router.push("/auth/signin");
   };
 
@@ -74,9 +74,6 @@ const Navbar = () => {
           >
             <li>
               <p>Profile</p>
-            </li>
-            <li>
-              <p>Settings</p>
             </li>
             <li onClick={logOut}>
               <p>Logout</p>

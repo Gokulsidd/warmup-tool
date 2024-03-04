@@ -1,9 +1,11 @@
 "use client";
 import EmptyEmailAccount from "@/app/ui/emptyEmailAccounts/page";
 import { EmailAccountsList } from "@/constants";
+import { handleInputChange } from "@/utils/helper";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 const EmailAccounts = () => {
   const [emailAccounts, setEmailAccounts] = useState(EmailAccountsList);
@@ -24,14 +26,6 @@ const EmailAccounts = () => {
   const { id } = useParams()
 
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSmtpDetails((prevValue) => ({
-      ...prevValue,
-      [name]: value,
-    }));
-  };
-
   const handleRadioChange = (e) => {
     const { value } = e.target;
     setSmtpDetails((prevValue)=>({
@@ -39,6 +33,8 @@ const EmailAccounts = () => {
       smtpPort: value === '' ? null : parseInt(value, 10)
     }) )
   };
+
+
 
   const handleSmtpSaveButtonClick = (e) => {
     e.preventDefault();
@@ -303,6 +299,7 @@ const EmailAccounts = () => {
           <EmptyEmailAccount />
         )}
       </div>
+      <Toaster />
     </div>
   );
 };
